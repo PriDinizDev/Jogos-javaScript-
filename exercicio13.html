@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinhe o Número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1.2em;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px; /* Define uma largura fixa para o campo de entrada */
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adivinhe o Número</h1>
+    <p>O número gerado está entre 1 e 6. Faça o seu palpite!</p>
+    <input type="number" id="palpite" placeholder="Digite seu palpite (1-6)" required min="1" max="6">
+    <button onclick="verificarPalpite()">Verificar Palpite</button>
+
+    <p class="result" id="resultado"></p>
+    <p class="result" id="contagem"></p>
+
+    <script>
+        let numeroAleatorio = Math.floor(Math.random() * 6) + 1; // Gera número aleatório entre 1 e 6
+        let palpitesCertos = 0;
+        let palpitesErrados = 0;
+
+        function verificarPalpite() {
+            const palpite = parseInt(document.getElementById('palpite').value);
+            const resultado = document.getElementById('resultado');
+            const contagem = document.getElementById('contagem');
+
+            if (palpite < 1 || palpite > 6 || isNaN(palpite)) {
+                resultado.innerHTML = 'Por favor, digite um número válido entre 1 e 6.';
+                return;
+            }
+
+            if (palpite === numeroAleatorio) {
+                resultado.innerHTML = 'Parabéns! Você acertou! O número é o ' + numeroAleatorio;
+                palpitesCertos++;
+                contagem.innerHTML = `Palpites certos: ${palpitesCertos}, Palpites errados: ${palpitesErrados}`;
+                // Gera um novo número aleatório para o próximo palpite
+                numeroAleatorio = Math.floor(Math.random() * 6) + 1; 
+            } else {
+                if (palpite < numeroAleatorio) {
+                    resultado.innerHTML = 'O número pode ser maior.';
+                } else {
+                    resultado.innerHTML = 'O número pode ser menor.';
+                }
+                palpitesErrados++;
+                contagem.innerHTML = `Palpites certos: ${palpitesCertos}, Palpites errados: ${palpitesErrados}`;
+            }
+        }
+    </script>
+</body>
+</html>

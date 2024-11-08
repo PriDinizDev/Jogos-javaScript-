@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Apostas - Roleta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+        .button-red {
+            background-color: #e74c3c;
+        }
+        .button-black {
+            background-color: #34495e;
+        }
+        .result {
+            font-size: 2em;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+        .bet-input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #555;
+        }
+        .roulette-display {
+            font-size: 3em;
+            margin: 20px 0;
+            height: 50px;
+            color: white;
+            padding: 10px;
+        }
+        .current-bet-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .bet-amount-box {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        .bet-number-box {
+            padding: 10px 20px;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo de Apostas - Roleta</h1>
+        <h2 id="balance">Saldo: 10€</h2>
+        
+        <input type="number" id="betAmount" class="bet-input" placeholder="Valor da Aposta" min="1" />
+        <input type="number" id="betNumber" class="bet-input" placeholder="Número (1-5)" min="1" max="5" />
+
+        <div>
+            <button class="button button-red" onclick="placeBet('red')">Apostar em Vermelho</button>
+            <button class="button button-black" onclick="placeBet('black')">Apostar em Preto</button>
+        </div>
+
+        <div class="roulette-display" id="rouletteDisplay">0</div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <div class="footer">
+        <h3>Regras do Jogo</h3>
+        <p>1. O saldo inicial é de 10€.</p>
+        <p>2. Aposte um valor e escolha uma cor (vermelho ou preto) e um número (1-5).</p>
+        <p>3. Se acertar a cor e o número, você ganha 35 vezes o valor apostado.</p>
+        <p>4. Se acertar a cor e o número for maior ou menor, você ganha 2 vezes o valor apostado.</p>
+        <p>5. Se acertar apenas a cor, o preto paga o valor apostado e o vermelho paga a metade do valor apostado.</p>
+        <p>6. O jogo termina quando o saldo chega a 0€.</p>
+        
+        <div class="current-bet-display">
+            <div id="betAmountDisplay" class="bet-amount-box">Valor Apostado: 0€</div>
+            <div id="betNumberDisplay" class="bet-number-box">Número Apostado: -</div>
+        </div>
+    </div>
+
+    <script>
+        let balance = 10;
+        let rouletteInterval;
+        let userColor;
+        let userNumber;
+        let winningColor;
+        let winningNumber;
+
+        function updateBalance() {
+            document.getElementById('balance').innerText = `Saldo: ${balance.toFixed(2)}€`;
+        }
+
+        function startRoulette() {
+            const display = document.getElementById('rouletteDisplay');
+            let colors = ['red', 'black'];
+            rouletteInterval = setInterval(() => {
+                winningColor = colors[Math.floor(Math.random() * 2)];
+                winningNumber = Math.floor(Math.random() * 5) + 1;
+                display.style.backgroundColor = winningColor;
+                display.innerHTML = `<span style="color: white;">${winningNumber}</span>`;
+            }, 100);
+        }
+
+        function stopRoulette() {
+            clearInterval(rouletteInterval);
+        }
+
+        function updateBetDisplay() {
+            const betAmount = document.getElementById('betAmount').value || 0;
+            const betNumber = document.getElementById('betNumber').value || '-';
+            const betAmountDisplay = document.getElementById('betAmountDisplay');
+            const betNumberDisplay = document.getElementById('betNumberDisplay');
+
+            betAmountDisplay.innerText = `Valor Apostado: ${betAmount}€`;
+            betNumberDisplay.innerText = `Número Apostado: ${betNumber}`;
+
+            // Define a cor da caixa de número apostado
+            if (userColor === 'red') {
+                betNumberDisplay.style.backgroundColor = '#e74c3c';
+            } else if (userColor === 'black') {
+                betNumberDisplay.style.backgroundColor = '#34495e';
+            }
+        }
+
+        document.getElementById('betAmount').addEventListener('input', updateBetDisplay);
+        document.getElementById('betNumber').addEventListener('input', updateBetDisplay);
+
+        function placeBet(color) {
+            const betAmount = parseInt(document.getElementById('betAmount').value);
+            const betNumber = parseInt(document.getElementById('betNumber').value);
+            const resultDiv = document.getElementById('result');
+
+            if (!betAmount || betAmount <= 0 || betAmount > balance) {
+                resultDiv.innerText = "Saldo insuficiente para a aposta!";
+                setTimeout(() => {
+                    alert("Você não tem saldo suficiente.");
+                }, 1000);
+                return;
+            }
+
+            if (betNumber < 1 || betNumber > 5) {
+                alert("Por favor, escolha um número válido entre 1 e 5.");
+                return;
+            }
+
+            userColor = color;
+            userNumber = betNumber;
+
+            updateBetDisplay();
+            startRoulette();
+
+            setTimeout(() => {
+                stopRoulette();
+
+                let winMessage = "";
+
+                if (userColor === winningColor && userNumber === winningNumber) {
+                    balance += betAmount * 35;
+                    winMessage = `Você ganhou: ${betAmount * 35}€!`;
+                } else if (userColor === winningColor) {
+                    if (winningNumber > userNumber || winningNumber < userNumber) {
+                        balance += betAmount * 2;
+                        winMessage = `Você ganhou: ${betAmount * 2}€!`;
+                    } else {
+                        balance += (userColor === 'black') ? betAmount : betAmount / 2;
+                        winMessage = `Você ganhou: ${(userColor === 'black') ? betAmount : betAmount / 2}€!`;
+                    }
+                } else {
+                    balance -= betAmount;
+                    winMessage = `Você perdeu: ${betAmount}€.`;
+                }
+
+                resultDiv.innerHTML = `A cor vencedora é: <span style="color: ${winningColor};">${winningColor}</span> e o número vencedor é: ${winningNumber}. ${winMessage}`;
+
+                updateBalance();
+
+                if (balance <= 0) {
+                    alert("Game Over! Você não tem mais saldo.");
+                    balance = 0;
+                    updateBalance();
+                }
+
+                document.getElementById('betAmount').value = '';
+                document.getElementById('betNumber').value = '';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

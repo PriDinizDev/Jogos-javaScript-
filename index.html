@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios práticos</title>
+    <style>
+              body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 0.4%;
+            max-width: 1920px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        .frame {
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .description {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #25deac;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .roulette-container {
+            position: absolute;
+            bottom: 20px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            display: flex;
+            align-items: center;
+        }
+       
+        .roulette-button {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+        }
+        .game-text {
+            margin-right: 10px; 
+            font-size: 20px; 
+            color: #333; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Resoluções dos Exercícios</h1>
+    <div class="container">
+       
+        <script>
+            
+            const descricoes = [
+                "É preciso fazer todos exe...", "Já chega de JavaScript!", "O Formando está Aprovado?",
+                "Eu sou... e tenho...anos", "Mostra na console", "Programa que leia do utilizador...",
+                "...Data atual do sistema...", "Olá  usuário... Saudação", "Impressao com botão...",
+                "Exemplo de Mostrar URL", "Positivo ou negativo?", "Maior ou menor???",
+                "Adivinhe o Número...rnd", "Números em ordem crescente", "Mais Perto de 100...",
+                "leia a nota quantitativa...", "...Não. Não diga Não...", "...Contar  numéricos...",
+                "...Inversor de  Frases...", "Converter -> Euro -> Dólar", "...Converter para negativo...",
+                "...Retira o Imposto...", "Calcula valor com imposto", "Gerador de Senha Aleatória...",
+                "Encontrar Maior Número gerado", "...Encontrar Menor...", "consumo médio de combustível",
+                "diferença entre o maior e o menor", "lançamento de um dado 35.000x", "O valor digitado é um número?",
+                "As senhas são iguais?", "Desenha o retangulo", "Desenha o círculo com canvas",
+                "Esconde a metade do Email", "Parte a string em pedaços", "Gera asteriscos em linhas",
+                "Soma numeros de 1 ate...", "Múltiplos de 3 de 0 a 100", "Formata Data mostra mes",
+                "Controle hora funcionarios", "Verificar Dia da Semana", "Calcula idade em anos",
+                "Preco certo jogo acerte o preco", "Eleiçoes. Quem ganha?", "quantas vezes cada numero? ",
+                "Remover Nrs Duplicados", "numero que ocorre mais vezes ", "separa pares a partir de 2 digitos",
+                "Soma de Arrays Aleatórios", "Matriz de Nrs Aleatórios", "Caracteres Especiais",
+                "Conv Decimal para Binário", "Cor de Fundo Aleatória", "Cor de Fundo do Parágrafo",
+                "Gerar colunas e linhas Tabela", "Escreve na tabela 3x3 indice", "Dimensões da Janela",
+                "Ordenação com Bubble Sort", "Ordenação com Insertion Sort", "Ordenação com Selection Sort"
+            ];
+
+           
+            for (let i = 0; i < descricoes.length; i++) {
+                document.write(`
+                    <div class="frame">
+                        <div class="description">
+                            ${descricoes[i]}
+                        </div>
+                        <button class="button" onclick="window.location.href='exercicio${i + 1}.html'">Exercício ${i + 1}</button>
+                    </div>
+                `);
+            }
+        </script>
+    </div>
+    <div class="roulette-container">
+        <span class="game-text"><strong>GAME DE APOSTA</strong></span>
+        <a href="GameAposta.html">
+            <img src="roleta.gif" alt="Roleta" class="roulette-button">
+        </a>
+</body>
+</html>

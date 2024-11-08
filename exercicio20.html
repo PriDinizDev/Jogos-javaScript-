@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Euro para Dólar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1.2em;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px; /* Define uma largura fixa para os campos de entrada */
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Conversor Euro para Dólar</h1>
+    <p>Digite o valor em euros:</p>
+    <input type="number" id="valorEuros" placeholder="Valor em Euros" required>
+    <p>Digite o câmbio (1 Euro em Dólares):</p>
+    <input type="number" id="cambio" placeholder="Câmbio" required>
+    <button onclick="converter()">Converter</button>
+
+    <p class="result" id="resultado"></p>
+
+    <script>
+        function converter() {
+            const valorEuros = parseFloat(document.getElementById('valorEuros').value);
+            const cambio = parseFloat(document.getElementById('cambio').value);
+
+            // Verifica se os valores são válidos
+            if (!isNaN(valorEuros) && !isNaN(cambio) && cambio > 0) {
+                // Calcula o valor em dólares
+                const valorDolares = valorEuros * cambio;
+
+                // Exibe o resultado
+                document.getElementById('resultado').innerHTML = 
+                    `Valor em Dólares: $${valorDolares.toFixed(2)}`;
+            } else {
+                document.getElementById('resultado').innerHTML = 
+                    'Por favor, insira valores válidos.';
+            }
+        }
+    </script>
+</body>
+</html>

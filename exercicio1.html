@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício de Alerta</title>
+
+    <!-- Estilos da página e do botão -->
+    <style>
+        /* Centraliza o conteúdo da página (o botão) usando Flexbox */
+        body {
+            display: flex; /* Habilita o modo de layout flexível */
+            justify-content: center; /* Centraliza o botão horizontalmente */
+            align-items: center; /* Centraliza o botão verticalmente */
+            height: 100vh; /* Define a altura da página como 100% da janela de visualização */
+            margin: 0; /* Remove as margens padrão da página */
+        }
+
+        /* Estilo do botão */
+        button {
+            font-size: 24px; /* Define o tamanho da fonte (letras grandes) */
+            padding: 20px 40px; /* Aumenta o tamanho do botão com mais espaço dentro (20px em cima e embaixo, 40px nas laterais) */
+            background-color: #4CAF50; /* Define a cor de fundo do botão (verde) */
+            color: white; /* Define a cor do texto do botão (branco) */
+            border: none; /* Remove a borda padrão do botão */
+            border-radius: 10px; /* Arredonda os cantos do botão com um raio de 10px */
+            cursor: pointer; /* Altera o cursor para uma mãozinha ao passar sobre o botão */
+        }
+
+        /* Efeito ao passar o mouse sobre o botão */
+        button:hover {
+            background-color: #45a049; /* Muda a cor do botão quando o usuário passa o mouse por cima (um tom mais escuro de verde) */
+        }
+    </style>
+
+    <!-- Script JavaScript que será executado quando o botão for clicado -->
+    <script>
+        /* Função que exibe uma caixa de alerta */
+        function mostrarAlerta() {
+            alert("É preciso fazer todos os exercícios para aprender"); /* Exibe uma mensagem de alerta */
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Botão que chama a função mostrarAlerta quando clicado -->
+    <button onclick="mostrarAlerta()">Clique aqui</button>
+
+</body>
+</html>

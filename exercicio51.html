@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover Caracteres Especiais</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 200px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            padding: 10px;
+            background-color: #FF00EE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #5AB300;
+        }
+        .output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Remover Caracteres Especiais</h1>
+        <input type="text" id="inputTexto" placeholder="Digite uma palavra ou frase" style="width: 100%; padding: 10px; margin-bottom: 10px;">
+        <button class="button" onclick="removerCaracteres()">Remover Caracteres</button>
+        <div class="output" id="resultado"></div>
+    </div>
+
+    <script>
+        function removerCaracteres() {
+            // Obtém o texto do input
+            const textoOriginal = document.getElementById('inputTexto').value;
+
+            // Remove caracteres especiais usando uma expressão regular
+            const textoLimpo = textoOriginal.replace(/[^a-zA-Z0-9\s]/g, '');
+
+            // Exibe o resultado
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `Texto sem caracteres especiais: <strong>${textoLimpo}</strong>`;
+        }
+    </script>
+</body>
+</html>

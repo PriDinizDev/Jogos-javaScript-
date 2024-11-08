@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cor de Fundo Aleatória com Degradê</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: background 0.5s;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #ff00ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #5ab300;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alterar Cor de Fundo</h1>
+    <button class="button" onclick="mudarCorDeFundo()">Mudar Cor</button>
+
+    <script>
+        function gerarCorAleatoria() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function mudarCorDeFundo() {
+            const cor1 = gerarCorAleatoria();
+            const cor2 = gerarCorAleatoria()
+            document.body.style.background = `linear-gradient(to right, ${cor1}, ${cor2})`;
+        }
+    </script>
+</body>
+</html>

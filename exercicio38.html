@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 38 - Múltiplos de 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercício 38</h1>
+    <div class="container">
+        <button class="button" onclick="imprimirMultiplos()">Imprimir Múltiplos de 3</button>
+        <table id="resultTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Múltiplos de 3</th>
+                    <th>Múltiplos de 3</th>
+                    <th>Múltiplos de 3</th>
+                </tr>
+            </thead>
+            <tbody id="resultBody">
+                <!-- Os múltiplos de 3 serão adicionados aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function imprimirMultiplos() {
+            const resultBody = document.getElementById('resultBody');
+            const resultTable = document.getElementById('resultTable');
+            resultBody.innerHTML = ''; // Limpa a tabela existente
+
+            let row; // Inicializa a variável da linha
+            for (let i = 1; i <= 100; i++) {
+                if (i % 3 === 0) {
+                    if (i % 9 === 3) {
+                        row = document.createElement('tr'); // Cria uma nova linha a cada 3 múltiplos
+                    }
+                    const cell = document.createElement('td'); // Cria uma nova célula
+                    cell.textContent = i; // Define o conteúdo da célula
+                    row.appendChild(cell); // Adiciona a célula à linha
+                    if (i % 9 === 0 || i === 99) {
+                        resultBody.appendChild(row); // Adiciona a linha ao corpo da tabela
+                    }
+                }
+            }
+            resultTable.style.display = 'table'; // Mostra a tabela após adicionar os dados
+        }
+    </script>
+</body>
+</html>

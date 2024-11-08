@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 37 - Soma dos Números</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #555;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercício 37</h1>
+    <div class="container">
+        <input type="number" id="numeroInput" placeholder="Digite um número" required min="1">
+        <button class="button" onclick="calcularSoma()">Calcular Soma</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calcularSoma() {
+            const numero = parseInt(document.getElementById('numeroInput').value);
+            const resultDiv = document.getElementById('result');
+
+            // Garantir que o número é válido
+            if (isNaN(numero) || numero < 1) {
+                resultDiv.innerHTML = 'Por favor, insira um número válido maior que 0.';
+                return;
+            }
+
+            // Calcular a soma de 1 até o número
+            let soma = 0;
+            for (let i = 1; i <= numero; i++) {
+                soma += i;
+            }
+
+            // Exibir o resultado
+            resultDiv.innerHTML = `A soma dos números de 1 até ${numero} é ${soma}.`;
+        }
+    </script>
+</body>
+</html>

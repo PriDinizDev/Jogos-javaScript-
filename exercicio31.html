@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 31 - Verificação de Senha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .frame {
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px; /* Largura da caixa */
+        }
+        .input-field {
+            width: 100%; /* Largura total para os campos de entrada */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Inclui padding e border no tamanho total */
+            margin-bottom: 10px; /* Espaço entre os campos */
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercício 31</h1>
+    <div class="frame">
+        <label for="password">Senha:</label><br>
+        <input type="password" id="password" class="input-field" placeholder="Digite a senha"><br>
+        
+        <label for="confirmPassword">Confirmação da Senha:</label><br>
+        <input type="password" id="confirmPassword" class="input-field" placeholder="Confirme a senha"><br>
+
+        <button class="button" onclick="verificarSenhas()">Verificar</button>
+        <div id="resultado" class="result"></div>
+    </div>
+
+    <script>
+        function verificarSenhas() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const resultadoDiv = document.getElementById('resultado');
+
+            // Verifica se as senhas são iguais
+            if (password === confirmPassword) {
+                resultadoDiv.innerHTML = 'As senhas são iguais.';
+                resultadoDiv.style.color = 'green'; // Cor para sucesso
+            } else {
+                resultadoDiv.innerHTML = 'Erro: As senhas não coincidem.';
+                resultadoDiv.style.color = 'red'; // Cor para erro
+            }
+        }
+    </script>
+</body>
+</html>

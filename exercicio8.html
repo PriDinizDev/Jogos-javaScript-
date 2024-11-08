@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem do Dia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .message {
+            font-size: 88px;
+            color: #007BFF;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Olá Usuário!</h1>
+    <p class="message" id="mensagem"></p>
+
+    <script>
+        // Função para exibir a mensagem de acordo com a hora
+        function mostrarMensagem() {
+            const data = new Date(); // Obtém a data e hora atuais
+            const hora = data.getHours(); // Obtém a hora atual
+
+            let mensagem;
+
+            // Verifica a hora para definir a mensagem apropriada
+            if (hora >= 5 && hora < 12) {
+                mensagem = "Bom dia";
+            } else if (hora >= 12 && hora < 18) {
+                mensagem = "Boa tarde";
+            } else {
+                mensagem = "Boa noite";
+            }
+
+            // Exibe a mensagem na página
+            document.getElementById('mensagem').innerText = mensagem;
+        }
+
+        // Chama a função para mostrar a mensagem ao carregar a página
+        mostrarMensagem();
+    </script>
+</body>
+</html>

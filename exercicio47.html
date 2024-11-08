@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Número Mais Frequente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            padding: 10px;
+            background-color: #FF00EE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #5AB300;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Número Mais Frequente</h1>
+        <button class="button" onclick="encontrarNumeroFrequente()">Encontrar Número Frequente</button>
+        <div class="result" id="resultado"></div>
+    </div>
+
+    <script>
+        function encontrarNumeroFrequente() {
+            const numeros = [];
+            const contagem = {};
+
+            // Gera 100 números aleatórios entre 0 e 1.000.000
+            for (let i = 0; i < 100; i++) {
+                const numero = Math.floor(Math.random() * 1001);
+                numeros.push(numero);
+
+                // Conta a ocorrência de cada número
+                contagem[numero] = (contagem[numero] || 0) + 1;
+            }
+
+            // Determina o número mais frequente
+            let maxContagem = 0;
+            let numeroMaisFrequente = null;
+
+            for (const numero in contagem) {
+                if (contagem[numero] > maxContagem) {
+                    maxContagem = contagem[numero];
+                    numeroMaisFrequente = numero;
+                }
+            }
+
+            // Exibe os resultados
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                <p>Número gerado mais frequente: ${numeroMaisFrequente} (ocorre ${maxContagem} vez(es))</p>
+            `;
+        }
+    </script>
+</body>
+</html>
