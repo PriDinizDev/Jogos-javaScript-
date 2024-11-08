@@ -159,8 +159,19 @@
         document.getElementById('betNumber').addEventListener('input', updateBetDisplay);
 
         function placeBet(color) {
-            const betAmount = parseInt(document.getElementById('betAmount').value);
-            const betNumber = parseInt(document.getElementById('betNumber').value);
+            const betAmountValue = document.getElementById('betAmount').value;
+            if(betAmountValue==''){
+                alert('Necessário preencher um valor!');
+                return;
+            }
+            const betNumberValue = document.getElementById('betNumber').value;
+            if(betNumberValue==''){
+                alert('Necessário preencher o número da aposta!');
+                return;
+            }
+            
+            const betAmount = parseInt(betAmountValue);
+            const betNumber = parseInt(betNumberValue);
             const resultDiv = document.getElementById('result');
 
             if (!betAmount || betAmount <= 0 || betAmount > balance) {
