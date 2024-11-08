@@ -68,7 +68,7 @@
 
             // Verifica se o input é um número
             if (!isNaN(input) && input.trim() !== '') {
-                resultadoDiv.innerHTML = `O valor "${input}" é um número.`;
+                resultadoDiv.innerHTML = `O valor "${input.trim()}" é um número.`;
                 resultadoDiv.style.color = 'green'; // Cor para sucesso
             } else {
                 resultadoDiv.innerHTML = 'Erro: O valor digitado não é um número.';
