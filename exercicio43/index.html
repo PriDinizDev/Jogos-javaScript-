@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso Preço Certo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .product {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            padding: 10px;
+            margin: 0px -14px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Concurso Preço Certo</h1>
+        <div>
+            <label for="numPlayers">Número de Jogadores:</label>
+            <input type="number" id="numPlayers" placeholder="Insira o número de jogadores" min="2">
+            <button class="button" onclick="iniciarJogo()">Iniciar Jogo</button>
+        </div>
+        <div id="jogo" style="display: none;">
+            <div id="produtos"></div>
+            <button class="button" onclick="determinarVencedor()">Verificar Vencedor</button>
+            <div class="message" id="resultado"></div>
+        </div>
+    </div>
+
+    <script>
+        let produtos = [
+            { nome: "Computador", valor: 800, imagem: "computador.png" },
+            { nome: "Frigorífico", valor: 1200, imagem: "frigorifico.jpg" },
+            { nome: "Fogão", valor: 600, imagem: "fogao.jpg" },
+            { nome: "Microondas", valor: 80, imagem: "microondas.jpg" }
+        ];
+
+        let jogadores = [];
+
+        function iniciarJogo() {
+            const numPlayers = document.getElementById('numPlayers').value;
+            if (numPlayers < 2) {
+                alert("Deve haver pelo menos 2 jogadores!");
+                return;
+            }
+
+            jogadores = [];
+            for (let i = 0; i < numPlayers; i++) {
+                const nome = prompt(`Insira o nome do Jogador ${i + 1}:`);
+                jogadores.push({ nome: nome, ofertas: [] });
+            }
+
+            document.getElementById('numPlayers').style.display = 'none';
+            document.querySelector('button').style.display = 'none';
+            mostrarProdutos();
+            document.getElementById('jogo').style.display = 'block';
+        }
+
+        function mostrarProdutos() {
+            const produtosDiv = document.getElementById('produtos');
+            produtosDiv.innerHTML = '';
+
+            produtos.forEach((produto, index) => {
+                produtosDiv.innerHTML += `
+                    <div class="product">
+                        <h2>${produto.nome}</h2>
+                    </div>
+                `;
+                
+                
+                jogadores.forEach((jogador, jogadorIndex) => {
+                    produtosDiv.innerHTML += `
+                        <input type="number" id="oferta${index}-${jogadorIndex}" placeholder="Oferta de ${jogador.nome} para ${produto.nome}" min="0" oninput="verificarOferta(${index}, ${jogadorIndex})">
+                    `;
+                });
+            });
+        }
+
+        function verificarOferta(produtoIndex, jogadorIndex) {
+            setTimeout(() => {
+                const ofertaAtual = parseFloat(document.getElementById(`oferta${produtoIndex}-${jogadorIndex}`).value) || 0;
+                const outrasOfertas = [];
+
+                
+                jogadores.forEach((jogador, index) => {
+                    if (index !== jogadorIndex) {
+                        const oferta = parseFloat(document.getElementById(`oferta${produtoIndex}-${index}`).value) || 0;
+                        outrasOfertas.push(oferta);
+                    }
+                });
+
+                
+                if (outrasOfertas.includes(ofertaAtual)) {
+                    alert("Você não pode fazer uma oferta igual a outra já feita!");
+                    document.getElementById(`oferta${produtoIndex}-${jogadorIndex}`).value = ''; 
+                }
+            }, 800); 
+        }
+
+        function determinarVencedor() {
+            let resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.textContent = ''; 
+
+            produtos.forEach((produto, index) => {
+                let melhorJogador = null;
+                let melhorOferta = -1;
+
+                jogadores.forEach((jogador, jogadorIndex) => {
+                    const oferta = parseFloat(document.getElementById(`oferta${index}-${jogadorIndex}`).value) || 0;
+                    jogador.ofertas[index] = oferta; 
+
+                    if (oferta <= produto.valor) {
+                        if (oferta > melhorOferta) {
+                            melhorOferta = oferta;
+                            melhorJogador = jogador.nome;
+                        }
+                    }
+                });
+
+                if (melhorJogador) {
+                    resultadoDiv.innerHTML += `<p>${melhorJogador} ganhou o ${produto.nome} com uma oferta de ${melhorOferta} €.</p>`;
+                } else {
+                    resultadoDiv.innerHTML += `<p>Ninguém ganhou o ${produto.nome}. Todas as ofertas ultrapassaram o valor.</p>`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

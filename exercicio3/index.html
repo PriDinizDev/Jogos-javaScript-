@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprovação do Formando</title>
+    <script>
+        function mostrarMensagem() {
+            // Solicita o nome do utilizador
+            let nomeFormando = prompt("Por favor, insira o seu nome:");
+
+            // Verifica se o utilizador não clicou em "Cancelar" ou deixou o campo em branco
+            if (nomeFormando !== null && nomeFormando !== "") {
+                // Mostra a mensagem na página web
+                document.getElementById("mensagem").innerHTML = "O Formando " + nomeFormando + " está aprovado";
+            }
+        }
+    </script>
+</head>
+<body onload="mostrarMensagem()">
+    <h1>Aprovação</h1>
+    <div id="mensagem"></div>
+</body>
+</html>

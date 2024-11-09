@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontrar Menor Número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Encontrar Menor Número</h1>
+    <button onclick="encontrarMenorNumero()">Gerar e Encontrar</button>
+
+    <p class="result" id="resultado"></p>
+
+    <script>
+        function encontrarMenorNumero() {
+            const numeros = [];
+            
+            // Gera 100 números aleatórios entre 0 e 999
+            for (let i = 0; i < 100; i++) {
+                numeros.push(Math.floor(Math.random() * 1000)); // 0 a 999
+            }
+
+            // Encontra o menor número no array
+            const menorNumero = Math.min(...numeros);
+            
+            // Exibe o resultado
+            document.getElementById('resultado').innerHTML = `Números gerados: ${numeros.join(', ')}<br>Menor número: ${menorNumero}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 36 - Padrão de Asteriscos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #555;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exercício 36</h1>
+    <div class="container">
+        <input type="number" id="linhasInput" placeholder="Número de linhas" required min="1">
+        <button class="button" onclick="gerarPadrao()">Gerar Padrão</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function gerarPadrao() {
+            const linhas = parseInt(document.getElementById('linhasInput').value);
+            const resultDiv = document.getElementById('result');
+
+            // Garantir que o número de linhas é válido
+            if (isNaN(linhas) || linhas < 1) {
+                resultDiv.innerHTML = 'Por favor, insira um número válido de linhas.';
+                return;
+            }
+
+            let resultado = '';
+
+            // Ciclo encadeado para gerar o padrão
+            for (let i = 1; i <= linhas; i++) {
+                for (let j = 1; j <= i; j++) {
+                    resultado += '* ';
+                }
+                resultado += '<br>'; // Quebra de linha após cada linha de asteriscos
+            }
+
+            // Exibe o padrão
+            resultDiv.innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>

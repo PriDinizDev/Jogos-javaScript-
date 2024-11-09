@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dia da Semana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px -10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button {
+            padding: 10px;
+            margin: 10px -10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dia da Semana</h1>
+        <label for="data">Digite uma data (DD-MM-AAAA):</label>
+        <input type="date" id="data">
+        <button class="button" onclick="mostrarDiaSemana()">Verificar Dia da Semana</button>
+        <div class="message" id="resultado"></div>
+    </div>
+
+    <script>
+        function mostrarDiaSemana() {
+            const dataInput = document.getElementById('data').value;
+            const resultadoDiv = document.getElementById('resultado');
+
+            // Verifica se a data foi preenchida
+            if (!dataInput) {
+                resultadoDiv.textContent = "Por favor, insira uma data.";
+                resultadoDiv.style.color = "red";
+                return;
+            }
+
+            // Cria um objeto de data
+            const data = new Date(dataInput);
+            const hoje = new Date();
+            const diasDaSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+
+            // Obtém o dia da semana
+            const diaSemana = diasDaSemana[data.getUTCDay()];
+
+            // Verifica se a data é anterior à data atual
+            if (data < hoje) {
+                resultadoDiv.textContent = `A data ${dataInput} foi ${diaSemana}.`;
+            } else {
+                resultadoDiv.textContent = `A data ${dataInput} será ${diaSemana}.`;
+            }
+            resultadoDiv.style.color = "purple";
+        }
+    </script>
+</body>
+</html>
