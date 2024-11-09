@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela Dinâmica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #ff00ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #5ab300;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerar Tabela</h1>
+    <input type="number" id="linhas" placeholder="Número de Linhas" min="1" />
+    <input type="number" id="colunas" placeholder="Número de Colunas" min="1" />
+    <button class="button" onclick="gerarTabela()">Criar Tabela</button>
+
+    <div id="tabelaContainer" style="margin-top: 20px;"></div>
+
+    <script>
+        function gerarTabela() {
+            // Obtém o número de linhas e colunas
+            const numLinhas = document.getElementById('linhas').value;
+            const numColunas = document.getElementById('colunas').value;
+
+            // Valida se os valores são números
+            if (numLinhas < 1 || numColunas < 1) {
+                alert("Por favor, insira valores válidos para linhas e colunas.");
+                return;
+            }
+
+            // Cria a tabela
+            let tabelaHTML = "<table>";
+            for (let i = 0; i < numLinhas; i++) {
+                tabelaHTML += "<tr>";
+                for (let j = 0; j < numColunas; j++) {
+                    tabelaHTML += `<td></td>`;
+                }
+                tabelaHTML += "</tr>";
+            }
+            tabelaHTML += "</table>";
+
+            // Exibe a tabela no container
+            document.getElementById('tabelaContainer').innerHTML = tabelaHTML;
+        }
+    </script>
+</body>
+</html>

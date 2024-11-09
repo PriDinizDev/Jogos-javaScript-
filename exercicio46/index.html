@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover Números Duplicados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            padding: 10px;
+            background-color: #FF00EE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #5AB300;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .duplicado {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Remover Números Duplicados</h1>
+        <button class="button" onclick="removerDuplicados()">Gerar Números e Remover Duplicados</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function removerDuplicados() {
+            const numeros = [];
+            const numerosUnicos = [];
+            const numerosContados = {};
+
+            // Gera 100 números aleatórios entre 0 e 1001
+            for (let i = 0; i < 100; i++) {
+                const numero = Math.floor(Math.random() * 1001);
+                numeros.push(numero);
+            }
+
+            // Conta a ocorrência de cada número
+            numeros.forEach(numero => {
+                numerosContados[numero] = (numerosContados[numero] || 0) + 1;
+            });
+
+            // Remove duplicatas
+            for (let numero in numerosContados) {
+                if (numerosContados[numero] === 1) {
+                    numerosUnicos.push(numero);
+                }
+            }
+
+            // Função para gerar a tabela
+            const criarTabela = (array, titulo) => {
+                let tabelaHTML = `<h2>${titulo}</h2><table><tr>`;
+                for (let i = 0; i < array.length; i++) {
+                    const numero = array[i];
+                    // Se o número ocorre mais de uma vez, adiciona a classe 'duplicado'
+                    const classeDuplicado = numerosContados[numero] > 1 ? 'duplicado' : '';
+                    tabelaHTML += `<td class="${classeDuplicado}">${numero}</td>`;
+                    if ((i + 1) % 10 === 0 && i + 1 < array.length) {
+                        tabelaHTML += `</tr><tr>`;
+                    }
+                }
+                tabelaHTML += `</tr></table>`;
+                return tabelaHTML;
+            };
+
+            // Exibe os resultados
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = `
+                ${criarTabela(numeros, 'Array Original')}
+                ${criarTabela(numerosUnicos, 'Array Sem Duplicatas')}
+            `;
+        }
+    </script>
+</body>
+</html>

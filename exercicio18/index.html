@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contar Caracteres Numéricos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1.2em;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px; /* Define uma largura fixa para o campo de entrada */
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contar Números</h1>
+    <p>Digite uma frase:</p>
+    <input type="text" id="frase" placeholder="Digite sua frase aqui" required>
+    <button onclick="contarNumeros()">Enviar</button>
+
+    <p class="result" id="resultado"></p>
+
+    <script>
+        function contarNumeros() {
+            const frase = document.getElementById('frase').value;
+
+            // Usa uma expressão regular para encontrar caracteres numéricos
+            const numeros = frase.match(/\d/g);
+
+            // Conta a quantidade de números
+            const quantidadeNumeros = numeros ? numeros.length : 0;
+
+            // Exibe a quantidade de caracteres numéricos
+            document.getElementById('resultado').innerHTML = `Quantidade de caracteres numéricos: ${quantidadeNumeros}`;
+        }
+    </script>
+</body>
+</html>

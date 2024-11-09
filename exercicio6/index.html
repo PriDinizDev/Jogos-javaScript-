@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados do Formando</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 350px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            float: right;  /* Alinha o botão à direita */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Dados Pessoais</h1>
+        <input type="text" id="nome" placeholder="Digite seu nome" required>
+        <select id="estadoCivil">
+            <option value="" disabled selected>Selecione o estado civil</option>
+            <option value="Casado">Casado</option>
+            <option value="Solteiro">Solteiro</option>
+            <option value="Divorciado">Divorciado</option>
+            <option value="Viúvo">Viúvo</option>
+            <option value="Enrolado">Enrolado</option>
+        </select>
+        <input type="number" id="idade" placeholder="Digite sua idade" required>
+        <input type="number" id="altura" placeholder="Digite sua altura (em cm)" required>
+        <select id="socio">
+            <option value="" disabled selected>Sócio?</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+        </select>
+        <input type="text" id="email" placeholder="Digite seu email" required>
+        <button onclick="mostrarDados()">Enviar</button>
+
+        <p class="result" id="resultado"></p>
+    </div>
+
+    <script>
+        function mostrarDados() {
+            const nome = document.getElementById('nome').value;
+            const estadoCivil = document.getElementById('estadoCivil').value;
+            const idade = document.getElementById('idade').value;
+            const altura = document.getElementById('altura').value;
+            const socio = document.getElementById('socio').value;
+            const email = document.getElementById('email').value;
+
+            // Verifica se todos os campos estão preenchidos
+            if (nome && estadoCivil && idade && altura && socio && email) {
+                // Exibe os dados no parágrafo com id "resultado"
+                document.getElementById('resultado').innerHTML = 
+                    `Nome: ${nome}<br>` +
+                    `Estado civil: ${estadoCivil}<br>` +
+                    `Idade: ${idade} anos<br>` +
+                    `Altura: ${altura} cm<br>` +
+                    `Sócio: ${socio}<br>` +
+                    `Email: ${email}`;
+            } else {
+                document.getElementById('resultado').innerHTML = 'Por favor, preencha todos os campos.';
+            }
+        }
+    </script>
+</body>
+</html>

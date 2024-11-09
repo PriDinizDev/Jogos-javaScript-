@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cor de Fundo do Parágrafo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .paragraph {
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #ff00ee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #5ab300;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alterar Cor de Fundo do Parágrafo</h1>
+    <input type="text" id="corInput" placeholder="Digite uma cor (ex: red, #ff0000)" />
+    <button class="button" onclick="mudarCor()">Aplicar Cor</button>
+
+    <p class="paragraph" id="meuParagrafo">Insira a sua cor favorita, mas não fique triste.</p>
+
+    <script>
+        function mudarCor() {
+            const cor = document.getElementById('corInput').value;
+            const paragrafo = document.getElementById('meuParagrafo');
+            paragrafo.style.backgroundColor = cor;
+        }
+    </script>
+</body>
+</html>
